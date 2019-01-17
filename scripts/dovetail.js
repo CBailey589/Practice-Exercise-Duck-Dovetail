@@ -14,9 +14,9 @@ const createProductHTML = product => `
 
       <footer class="product__footer">
         Price: ${product.price.toLocaleString("en-US", {
-            style: "currency",
-            currency: "USD"
-        })}
+    style: "currency",
+    currency: "USD"
+})}
 
         <button id="${product.id}" class="product__purchaseButton">Purchase</button>
       </footer>
@@ -55,10 +55,12 @@ for (button of allButtons) {
             // Only if something was found, add the object to the
             // shopping cart array
             if (foundProduct !== null) {
-                shoppingCart.push(foundProduct)
-                displayShoppingCart()
+                foundProduct.counter = (foundProduct.counter + 1 || 1);
+                if (foundProduct.counter === 1) {
+                    shoppingCart.push(foundProduct)
+                }
             }
-
+            displayShoppingCart()
         }
     )
 

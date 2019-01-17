@@ -11,7 +11,7 @@ const displayShoppingCart = () => {
         cartEl.innerHTML +=
         `
         <section class="shoppingCart__item">
-        <div>${product.name}</div>
+        <div>${product.name} ${product.counter}</div>
         <div>${product.price.toLocaleString("en-US", {
             style: "currency",
             currency: "USD"
