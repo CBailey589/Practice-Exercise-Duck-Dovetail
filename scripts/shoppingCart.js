@@ -58,12 +58,13 @@ const displayShoppingCart = () => {
             "click",
             (event) => {
                 let shortenedIdIndex = event.target.id.replace("removeQty", "")
-                console.log(shortenedIdIndex);
-                if (shoppingCart[shortenedIdIndex].counter > 1) {
-                    shoppingCart[shortenedIdIndex].counter--;
-                    shoppingCart[shortenedIdIndex].totalPrice -= shoppingCart[shortenedIdIndex].price;
+                let removeDropdownQtyValue = parseInt(document.querySelector(`#dropdown${shortenedIdIndex}`).value);
+                if (shoppingCart[shortenedIdIndex].counter > removeDropdownQtyValue) {
+                    shoppingCart[shortenedIdIndex].counter -= removeDropdownQtyValue;
+                    shoppingCart[shortenedIdIndex].totalPrice -= (shoppingCart[shortenedIdIndex].price * removeDropdownQtyValue);
                     displayShoppingCart()
                 } else {
+                    shoppingCart[shortenedIdIndex].counter = 0;
                     shoppingCart.splice(shortenedIdIndex,1);
                     displayShoppingCart();
                 }
