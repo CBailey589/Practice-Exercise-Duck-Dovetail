@@ -9,15 +9,16 @@ const displayShoppingCart = () => {
     shoppingCart.forEach((product, idx) => {
 
         cartEl.innerHTML +=
-        `
+            `
         <section class="shoppingCart__item">
         <div>${product.name} ${product.counter}</div>
-        <div>${product.price.toLocaleString("en-US", {
-            style: "currency",
-            currency: "USD"
-        })}</div>
+        <div>${product.totalPrice.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD"
+            })}</div>
 
-        <button id="${idx}" class="cart_removeButton">Remove</button>
+        <button id="removeSingle${idx}" class="cart_removeSingleButton">Remove One</button>
+        <button id="${idx}" class="cart_removeButton">Remove All</button>
         </section>
         `
 
@@ -33,6 +34,7 @@ const displayShoppingCart = () => {
 
     // Get a reference to all purchase buttons
     const allRemoveButtons = document.querySelectorAll(".cart_removeButton")
+    const allRemoveSingleButtons = document.querySelectorAll(".cart_removeSingleButton")
 
     // Add a click event listener to each button
     for (const button of allRemoveButtons) {
@@ -44,8 +46,26 @@ const displayShoppingCart = () => {
                 displayShoppingCart()
             }
         )
-
     }
+    for (const button of allRemoveSingleButtons) {
+        button.addEventListener(
+            "click",
+            (event) => {
+                let shortenedIdIndex = event.target.id.replace("removeSingle", "")
+                console.log(shortenedIdIndex);
+                if (shoppingCart[shortenedIdIndex].counter > 1) {
+                    shoppingCart[shortenedIdIndex].counter--;
+                    shoppingCart[shortenedIdIndex].totalPrice -= shoppingCart[shortenedIdIndex].price;
+                    displayShoppingCart()
+                } else {
+                    shoppingCart.splice(shortenedIdIndex,1);
+                    displayShoppingCart();
+                }
+            }
+        )
+    }
+
+
 }
 
 
