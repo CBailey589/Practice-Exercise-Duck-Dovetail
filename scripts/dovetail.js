@@ -2,6 +2,8 @@
     Function to convert a JavaScript object representation
     of a product to an HTML representation
 */
+displayShoppingCart();
+    
 const createProductHTML = product => `
     <section class="product">
       <header class="product__header">
