@@ -60,16 +60,15 @@ for (button of allButtons) {
             // Only if something was found, add the object to the
             // shopping cart array
             if (foundProduct !== null) {
-                let dropdownQtyValue = parseInt(document.querySelector(`#dropdown${foundProduct.id}`).value);
-                console.log(dropdownQtyValue);
+                let purchaseDropdownQtyValue = parseInt(document.querySelector(`#dropdown${foundProduct.id}`).value);
                 foundProduct.counter = (foundProduct.counter + 1 || 1);
                 if (foundProduct.counter !== 1) {
-                    foundProduct.counter += (dropdownQtyValue - 1);
-                    foundProduct.totalPrice += foundProduct.price * dropdownQtyValue;
+                    foundProduct.counter += (purchaseDropdownQtyValue - 1);
+                    foundProduct.totalPrice += foundProduct.price * purchaseDropdownQtyValue;
                 }
                 if (foundProduct.counter === 1) {
-                    foundProduct.counter += (dropdownQtyValue - 1);
-                    foundProduct.totalPrice = foundProduct.price * dropdownQtyValue;
+                    foundProduct.counter += (purchaseDropdownQtyValue - 1);
+                    foundProduct.totalPrice = foundProduct.price * purchaseDropdownQtyValue;
                     shoppingCart.push(foundProduct)
                 }
             }
