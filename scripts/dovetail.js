@@ -32,7 +32,9 @@ const createProductHTML = product => `
             <option value=9>9</option>
         </select>
         <button id="${product.id}" class="product__purchaseButton">Purchase</button>
+ 
       </footer>
+      ${makeProductRatingHTML()}
 
     </section>
 `
@@ -88,6 +90,20 @@ for (button of allButtons) {
 
 
 
+// *****************NEED TO FIX THE EVENT LISTENERS FOR RATING BUTTONS****************************
+// const allRadios = document.querySelectorAll(".rating").getElementsByName;
+// console.log(allRadios);
+// var prev = null;
+// for (let i = 0; i < allRadios.length; i++) {
+//     allRadios[i].addEventListener("change", function () {
+//         console.log("SOMETHING HAPPENED")
+//         (prev) ? console.log(prev.value) : null;
+//         if (this !== prev) {
+//             prev = this;
+//         }
+//         console.log(this.value)
+//     });
+// }
 
 
 
