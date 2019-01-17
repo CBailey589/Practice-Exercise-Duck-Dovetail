@@ -56,7 +56,11 @@ for (button of allButtons) {
             // shopping cart array
             if (foundProduct !== null) {
                 foundProduct.counter = (foundProduct.counter + 1 || 1);
+                if (foundProduct.counter !== 1) {
+                    foundProduct.totalPrice += foundProduct.price;
+                }
                 if (foundProduct.counter === 1) {
+                    foundProduct.totalPrice = foundProduct.price;
                     shoppingCart.push(foundProduct)
                 }
             }
