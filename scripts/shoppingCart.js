@@ -12,7 +12,6 @@ const displayShoppingCart = () => {
         for (let i = 1; i <= product.counter; i++) {
             removeQtyDropdownHTML += `<option value=${i}>${i}</option>`
         }
-        console.log(removeQtyDropdownHTML);
 
         cartEl.innerHTML +=
             `
@@ -32,14 +31,15 @@ const displayShoppingCart = () => {
         </section>
         `
 
-        grandTotal += product.price
+        grandTotal += product.totalPrice;
     })
 
     cartEl.innerHTML += `
-      <h3>You owe us: ${grandTotal.toLocaleString("en-US", {
+      <h3 class="orderTotalPrice">You owe us: ${grandTotal.toLocaleString("en-US", {
         style: "currency",
         currency: "USD"
     })}</h3>
+    <button id="emptyShoppingCart">Remove All Items From Cart</button>
     `
 
     // Get a reference to all purchase buttons
@@ -75,6 +75,14 @@ const displayShoppingCart = () => {
             }
         )
     }
+
+    document.querySelector("#emptyShoppingCart").addEventListener(
+        "click",
+        (event) => {
+            shoppingCart.splice(0,shoppingCart.length);
+            displayShoppingCart();
+        }
+    )
 
 
 }
