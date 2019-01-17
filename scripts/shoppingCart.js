@@ -8,6 +8,12 @@ const displayShoppingCart = () => {
 
     shoppingCart.forEach((product, idx) => {
 
+        let removeQtyDropdownHTML = "";
+        for (let i = 1; i <= product.counter; i++) {
+            removeQtyDropdownHTML += `<option value=${i}>${i}</option>`
+        }
+        console.log(removeQtyDropdownHTML);
+
         cartEl.innerHTML +=
             `
         <section class="shoppingCart__item">
@@ -19,9 +25,7 @@ const displayShoppingCart = () => {
 
         
         <select id="dropdown${idx}">
-            <option value=1>1</option>
-            <option value=2>2</option>
-            <option value=3>3</option>
+            ${removeQtyDropdownHTML}
         </select>
         <button id="removeQty${idx}" class="cart_removeQtyButton">Remove Qty</button>
         <button id="${idx}" class="cart_removeButton">Remove All</button>
