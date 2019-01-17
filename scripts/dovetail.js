@@ -14,10 +14,15 @@ const createProductHTML = product => `
 
       <footer class="product__footer">
         Price: ${product.price.toLocaleString("en-US", {
-    style: "currency",
-    currency: "USD"
-})}
+            style: "currency",
+            currency: "USD"
+        })}
 
+        <select id="dropdown${product.id}">
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+        </select>
         <button id="${product.id}" class="product__purchaseButton">Purchase</button>
       </footer>
 
@@ -55,12 +60,16 @@ for (button of allButtons) {
             // Only if something was found, add the object to the
             // shopping cart array
             if (foundProduct !== null) {
+                let dropdownQtyValue = parseInt(document.querySelector(`#dropdown${foundProduct.id}`).value);
+                console.log(dropdownQtyValue);
                 foundProduct.counter = (foundProduct.counter + 1 || 1);
                 if (foundProduct.counter !== 1) {
-                    foundProduct.totalPrice += foundProduct.price;
+                    foundProduct.counter += (dropdownQtyValue - 1);
+                    foundProduct.totalPrice += foundProduct.price * dropdownQtyValue;
                 }
                 if (foundProduct.counter === 1) {
-                    foundProduct.totalPrice = foundProduct.price;
+                    foundProduct.counter += (dropdownQtyValue - 1);
+                    foundProduct.totalPrice = foundProduct.price * dropdownQtyValue;
                     shoppingCart.push(foundProduct)
                 }
             }

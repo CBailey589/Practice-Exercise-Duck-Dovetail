@@ -17,7 +17,13 @@ const displayShoppingCart = () => {
                 currency: "USD"
             })}</div>
 
-        <button id="removeSingle${idx}" class="cart_removeSingleButton">Remove One</button>
+        
+        <select id="dropdown${idx}">
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+        </select>
+        <button id="removeQty${idx}" class="cart_removeQtyButton">Remove Qty</button>
         <button id="${idx}" class="cart_removeButton">Remove All</button>
         </section>
         `
@@ -34,7 +40,7 @@ const displayShoppingCart = () => {
 
     // Get a reference to all purchase buttons
     const allRemoveButtons = document.querySelectorAll(".cart_removeButton")
-    const allRemoveSingleButtons = document.querySelectorAll(".cart_removeSingleButton")
+    const allremoveQtyButtons = document.querySelectorAll(".cart_removeQtyButton")
 
     // Add a click event listener to each button
     for (const button of allRemoveButtons) {
@@ -47,11 +53,11 @@ const displayShoppingCart = () => {
             }
         )
     }
-    for (const button of allRemoveSingleButtons) {
+    for (const button of allremoveQtyButtons) {
         button.addEventListener(
             "click",
             (event) => {
-                let shortenedIdIndex = event.target.id.replace("removeSingle", "")
+                let shortenedIdIndex = event.target.id.replace("removeQty", "")
                 console.log(shortenedIdIndex);
                 if (shoppingCart[shortenedIdIndex].counter > 1) {
                     shoppingCart[shortenedIdIndex].counter--;
