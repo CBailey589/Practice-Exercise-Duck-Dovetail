@@ -1,4 +1,4 @@
-
+// creates a rating object with an id that is unique to each product. 
 const makeProductRatingHTML = () => {
     return (
         `<fieldset class="rating">

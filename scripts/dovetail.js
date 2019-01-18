@@ -2,8 +2,12 @@
     Function to convert a JavaScript object representation
     of a product to an HTML representation
 */
+
+// Running this when the cart is empty to show the "you owe us" and "remove all items" when the page loads.
 displayShoppingCart();
-    
+   
+// Dropdown created with unique id to allow user to select qty of 1-9 to add to cart. Will be used with counter key created for products
+// product rating creater inserted into footer to create the rating elements for each product.
 const createProductHTML = product => `
     <section class="product">
       <header class="product__header">
@@ -19,7 +23,7 @@ const createProductHTML = product => `
             style: "currency",
             currency: "USD"
         })}
-
+        
         <select id="dropdown${product.id}">
             <option value=1>1</option>
             <option value=2>2</option>
@@ -70,12 +74,17 @@ for (button of allButtons) {
             // Only if something was found, add the object to the
             // shopping cart array
             if (foundProduct !== null) {
+                // gets value of dropdown next to purchase button
                 let purchaseDropdownQtyValue = parseInt(document.querySelector(`#dropdown${foundProduct.id}`).value);
+                // creates a counter key/value for each product that is put in the cart
                 foundProduct.counter = (foundProduct.counter + 1 || 1);
+                // if a product is already in the cart, this updates the qty and price within the cart
+                // total price is created to display a total price for a product quantity higher than 1 in the cart
                 if (foundProduct.counter !== 1) {
                     foundProduct.counter += (purchaseDropdownQtyValue - 1);
                     foundProduct.totalPrice += foundProduct.price * purchaseDropdownQtyValue;
                 }
+                // if the product is not in the cart, this adds it to the cart array, and updates the qty and price
                 if (foundProduct.counter === 1) {
                     foundProduct.counter += (purchaseDropdownQtyValue - 1);
                     foundProduct.totalPrice = foundProduct.price * purchaseDropdownQtyValue;
